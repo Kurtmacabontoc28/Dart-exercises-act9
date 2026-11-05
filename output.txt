@@ -1,0 +1,59 @@
+==================================================
+ FEUNRMF - PC16 OOP PROGRAM
+ Student: Dart Class Implementation (Week 9)
+==================================================
+
+--- Initial Fleet Status ---
+  Jeepney [FEU-101] | Route: Quiapo - Fairview
+    - Occupancy: 0 / 20 passengers
+    - Fare Rate: ₱15.00 per passenger
+    - Total Revenue: ₱0.00
+
+  Jeepney [FEU-202] | Route: Espana - SM San Lazaro
+    - Occupancy: 0 / 16 passengers
+    - Fare Rate: ₱13.00 per passenger
+    - Total Revenue: ₱0.00
+
+  Jeepney [FEU-303] | Route: Cubao - Divisoria
+    - Occupancy: 0 / 22 passengers
+    - Fare Rate: ₱14.00 per passenger
+    - Total Revenue: ₱0.00
+
+--- Simulating Passenger Operations ---
+  [Boarded] 12 passenger(s) onto FEU-101. Fare added: ₱180.00
+  [Boarded] 5 passenger(s) onto FEU-101. Fare added: ₱75.00
+  [Alert] Cannot board 5 passenger(s) on FEU-101 (Quiapo - Fairview). Only 3 seat(s) available!
+
+  [Boarded] 16 passenger(s) onto FEU-202. Fare added: ₱208.00
+  [Alighted] 6 passenger(s) left FEU-202. Remaining on board: 10
+
+  [Boarded] 20 passenger(s) onto FEU-303. Fare added: ₱280.00
+
+--- Fleet Revenue Summary (Map Usage) ---
+  Route: "Quiapo - Fairview" => Revenue: ₱255.00
+  Route: "Espana - SM San Lazaro" => Revenue: ₱208.00
+  Route: "Cubao - Divisoria" => Revenue: ₱280.00
+
+--- Final Fleet Report ---
+
+Vehicle #1:
+  Jeepney [FEU-101] | Route: Quiapo - Fairview
+    - Occupancy: 17 / 20 passengers
+    - Fare Rate: ₱15.00 per passenger
+    - Total Revenue: ₱255.00
+
+Vehicle #2:
+  Jeepney [FEU-202] | Route: Espana - SM San Lazaro
+    - Occupancy: 10 / 16 passengers
+    - Fare Rate: ₱13.00 per passenger
+    - Total Revenue: ₱208.00
+
+Vehicle #3:
+  Jeepney [FEU-303] | Route: Cubao - Divisoria
+    - Occupancy: 20 / 22 passengers
+    - Fare Rate: ₱14.00 per passenger
+    - Total Revenue: ₱280.00
+
+==================================================
+ TOTAL FLEET REVENUE: ₱743.00
+==================================================
