@@ -1,0 +1,145 @@
+class Jeepney {
+  String route;
+  String plateNumber;
+  int capacity;
+  double fareRate;
+
+  int _passengerCount;
+  double _totalFareCollected;
+
+  Jeepney({
+    required this.route,
+    required this.plateNumber,
+    required this.capacity,
+    this.fareRate = 13.0,
+    int initialPassengers = 0,
+  })  : _passengerCount = initialPassengers,
+        _totalFareCollected = 0.0;
+
+  int get passengerCount => _passengerCount;
+  double get totalFareCollected => _totalFareCollected;
+
+  bool boardPassengers(int count) {
+    if (count <= 0) {
+      print('  [Warning] Boarding count must be greater than zero.');
+      return false;
+    }
+
+    if (_passengerCount + count > capacity) {
+      int availableSeats = capacity - _passengerCount;
+      print(
+        '  [Alert] Cannot board $count passenger(s) on $plateNumber ($route). Only $availableSeats seat(s) available!',
+      );
+      return false;
+    }
+
+    _passengerCount += count;
+    double collected = count * fareRate;
+    _totalFareCollected += collected;
+    print(
+      '  [Boarded] $count passenger(s) onto $plateNumber. Fare added: ₱${collected.toStringAsFixed(2)}',
+    );
+    return true;
+  }
+
+  bool alightPassengers(int count) {
+    if (count <= 0) {
+      print('  [Warning] Alighting count must be greater than zero.');
+      return false;
+    }
+
+    if (count > _passengerCount) {
+      print(
+        '  [Error] Cannot alight $count passengers from $plateNumber. Only $_passengerCount on board.',
+      );
+      return false;
+    }
+
+    _passengerCount -= count;
+    print(
+      '  [Alighted] $count passenger(s) left $plateNumber. Remaining on board: $_passengerCount',
+    );
+    return true;
+  }
+
+  void displayStatus() {
+    print('  Jeepney [$plateNumber] | Route: $route');
+    print('    - Occupancy: $_passengerCount / $capacity passengers');
+    print('    - Fare Rate: ₱${fareRate.toStringAsFixed(2)} per passenger');
+    print('    - Total Revenue: ₱${_totalFareCollected.toStringAsFixed(2)}');
+  }
+}
+
+void main() {
+  print('==================================================');
+  print(' FEUNRMF - PC16 OOP PROGRAM');
+  print(' Student: Dart Class Implementation (Week 9)');
+  print('==================================================\n');
+
+  Jeepney jeepney1 = Jeepney(
+    route: 'Quiapo - Fairview',
+    plateNumber: 'FEU-101',
+    capacity: 20,
+    fareRate: 15.0,
+  );
+
+  Jeepney jeepney2 = Jeepney(
+    route: 'Espana - SM San Lazaro',
+    plateNumber: 'FEU-202',
+    capacity: 16,
+    fareRate: 13.0,
+  );
+
+  Jeepney jeepney3 = Jeepney(
+    route: 'Cubao - Divisoria',
+    plateNumber: 'FEU-303',
+    capacity: 22,
+    fareRate: 14.0,
+  );
+
+  List<Jeepney> fleet = [jeepney1, jeepney2, jeepney3];
+
+  print('--- Initial Fleet Status ---');
+  for (var jeep in fleet) {
+    jeep.displayStatus();
+    print('');
+  }
+
+  print('--- Simulating Passenger Operations ---');
+
+  jeepney1.boardPassengers(12);
+  jeepney1.boardPassengers(5);
+
+  jeepney1.boardPassengers(5);
+
+  print('');
+  jeepney2.boardPassengers(16); 
+  jeepney2.alightPassengers(6); 
+
+  print('');
+  jeepney3.boardPassengers(20);
+
+
+  print('\n--- Fleet Revenue Summary (Map Usage) ---');
+  Map<String, double> routeRevenueMap = {};
+
+  for (var jeep in fleet) {
+    routeRevenueMap[jeep.route] = jeep.totalFareCollected;
+  }
+
+  routeRevenueMap.forEach((route, totalRevenue) {
+    print('  Route: "$route" => Revenue: ₱${totalRevenue.toStringAsFixed(2)}');
+  });
+
+  print('\n--- Final Fleet Report ---');
+  double grandTotalRevenue = 0.0;
+  for (int i = 0; i < fleet.length; i++) {
+    print('\nVehicle #${i + 1}:');
+    fleet[i].displayStatus();
+    grandTotalRevenue += fleet[i].totalFareCollected;
+  }
+
+  print('\n==================================================');
+  print(' TOTAL FLEET REVENUE: ₱${grandTotalRevenue.toStringAsFixed(2)}');
+  print('==================================================');
+}
